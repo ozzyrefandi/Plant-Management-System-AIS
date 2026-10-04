@@ -26,6 +26,7 @@ import { calculatePartForecast } from './utils/calculations';
 import { Header } from './components/common/Header';
 import { Sidebar } from './components/common/Sidebar';
 import { GlobalFilterBar } from './components/common/GlobalFilterBar';
+import { OfflineIndicator } from './components/common/OfflineIndicator';
 
 // Feature modules
 import { ExecutiveDashboard } from './components/dashboard/ExecutiveDashboard';
@@ -767,6 +768,9 @@ export default function App() {
         onImportParts={handleImportParts}
         allData={data}
       />
+
+      {/* Network Connectivity Offline Toast Indicator */}
+      <OfflineIndicator />
     </div>
   );
 }

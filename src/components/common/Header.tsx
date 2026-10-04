@@ -7,9 +7,13 @@ import {
   RotateCcw,
   CheckCircle2,
   X,
-  BookOpen
+  BookOpen,
+  Wifi,
+  WifiOff
 } from 'lucide-react';
 import { UserRole, AlertItem } from '../../types';
+import { PWAInstallButton } from './PWAInstallButton';
+import { useOnlineStatus } from '../../hooks/useOnlineStatus';
 
 interface HeaderProps {
   currentRole: UserRole;
@@ -42,6 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [showAlertMenu, setShowAlertMenu] = useState(false);
   const criticalCount = alerts.filter((a) => a.type === 'CRITICAL').length;
+  const isOnline = useOnlineStatus();
 
   return (
     <header className="h-16 bg-[#0f172a] border-b border-neutral-800 px-4 sm:px-6 flex items-center justify-between z-30 sticky top-0">
@@ -66,9 +71,25 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Zone 2: Navigation Indicators & Quick Actions */}
       <div className="hidden lg:flex items-center gap-5 text-xs text-slate-300">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-slate-400">Status Operasi:</span>
-          <span className="font-semibold text-slate-200">NORMAL PIT PRODUCTION</span>
+          {isOnline ? (
+            <>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-slate-400">Jaringan:</span>
+              <span className="font-semibold text-emerald-400 flex items-center gap-1 font-mono-nums">
+                <Wifi className="w-3.5 h-3.5" />
+                ONLINE (PIT LIVE)
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span className="text-slate-400">Jaringan:</span>
+              <span className="font-semibold text-amber-400 flex items-center gap-1 font-mono-nums">
+                <WifiOff className="w-3.5 h-3.5" />
+                OFFLINE MODE (LOCAL DB)
+              </span>
+            </>
+          )}
         </div>
         <span className="text-neutral-700">|</span>
         <button
@@ -101,6 +122,9 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Zone 3: Alert Center & Role Profile Switcher */}
       <div className="flex items-center gap-3">
+        {/* PWA Install Button */}
+        <PWAInstallButton variant="header" />
+
         {/* Alert Notification Bell */}
         <div className="relative">
           <button

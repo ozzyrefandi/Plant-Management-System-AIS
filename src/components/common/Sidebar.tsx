@@ -20,6 +20,7 @@ import {
   TrendingUp,
   BookOpen
 } from 'lucide-react';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface SidebarProps {
   activeTab: string;
@@ -170,6 +171,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </nav>
           </div>
         ))}
+      </div>
+
+      {/* PWA Offline Install Button */}
+      <div className="px-3 pb-2">
+        <PWAInstallButton variant="sidebar" />
       </div>
 
       {/* Footer System Status */}

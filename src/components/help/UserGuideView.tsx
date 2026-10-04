@@ -114,9 +114,14 @@ export const UserGuideView: React.FC<UserGuideViewProps> = ({ onNavigateTab }) =
           tips: 'Gunakan Sidebar di sebelah kiri untuk berpindah modul, dan Global Filter Bar di bagian atas untuk memfilter data per Site Tambang atau Departemen.'
         },
         {
-          title: 'Penyimpanan Data Lokal (LocalStorage)',
+          title: 'Penyimpanan Data Lokal & Offline-First',
           desc: 'Seluruh transaksi (tambah unit, update HM/KM, edit WO, stok part) tersimpan otomatis pada browser LocalStorage tanpa memerlukan server terpisah untuk fase demonstrasi & uji coba.',
           tips: 'Data tidak hilang saat refresh browser. Untuk memindahkan data ke perangkat lain, gunakan fitur Export JSON/CSV pada menu Pengaturan Sistem.'
+        },
+        {
+          title: 'Dukungan Operasional Penuh Offline (Progressive Web App - PWA)',
+          desc: 'Aplikasi dirancang khusus dengan kemampuan Offline-First untuk operasional pit tambang yang sering mengalami kendala sinyal internet (blank spot).\n- Fitur Service Worker melakukan precache seluruh aset aplikasi.\n- Pengguna dapat meng-install aplikasi ke perangkat Android, iPhone, iPad, Windows, dan Mac menggunakan tombol "Install Offline App" di Header.\n- Seluruh pencatatan meter, pembuatan Work Order, pengecekan jadwal PM, dan status gudang tetap berfungsi 100% normal tanpa koneksi internet.',
+          tips: 'Gunakan indikator status jaringan di Header ("ONLINE" / "OFFLINE MODE") untuk memantau konektivitas real-time di pit tambang.'
         },
         {
           title: 'Multi-Role Akses Pengguna',
@@ -125,6 +130,7 @@ export const UserGuideView: React.FC<UserGuideViewProps> = ({ onNavigateTab }) =
         }
       ],
       standards: [
+        { label: 'Dukungan Offline', value: '100% PWA Offline-Ready (Service Worker + LocalStorage)' },
         { label: 'Resolusi Layar', value: 'Desktop (1920x1080), Laptop (1366x768), Tablet & Mobile' },
         { label: 'Penyimpanan', value: 'Browser LocalStorage (Dapat Export/Import JSON & CSV)' },
         { label: 'Basis Perhitungan', value: 'Jam Kerja Tambang Standar (720 Jam/Bulan per Unit)' }
@@ -932,6 +938,15 @@ export const UserGuideView: React.FC<UserGuideViewProps> = ({ onNavigateTab }) =
             </h5>
             <p className="text-slate-300 leading-relaxed text-[11px]">
               Buka tab <strong>Part Forecast Demand</strong> untuk melihat status ketersediaan suku cadang terkait di gudang. Buat Purchase Order jika stok habis atau alihkan part dari unit standby non-kritis bila diizinkan supervisor.
+            </p>
+          </div>
+
+          <div className="bg-slate-900/80 border border-slate-800/80 p-3.5 rounded-lg">
+            <h5 className="font-bold text-amber-400 text-xs mb-1">
+              Q: Apakah aplikasi ini mendukung penggunaan Offline di Pit Tambang tanpa sinyal internet?
+            </h5>
+            <p className="text-slate-300 leading-relaxed text-[11px]">
+              <strong>Sangat bisa dan didukung penuh (100% PWA Offline-Ready).</strong> Aplikasi menggunakan teknologi Progressive Web App (PWA) dengan Service Worker precaching dan HTML5 LocalStorage. Anda dapat memasang aplikasi ke smartphone Android, iPhone, iPad, atau Laptop melalui tombol <strong>&quot;Install Offline App&quot;</strong> di Header. Saat mekanik atau foreman berada di area tambang tanpa sinyal (blank spot), seluruh pencatatan meter, pembuatan WO, inspeksi PM, dan cek stok tetap berjalan normal.
             </p>
           </div>
 
