@@ -1,0 +1,6 @@
+{
+  "name": "Plant Management System",
+  "description": "Sistem Manajemen Alat Berat Pertambangan: Monitoring Unit HM/KM, Preventive & Predictive Maintenance, Work Order, Pareto Failure, dan Spare Part Forecasting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
