@@ -950,6 +950,23 @@ export const UserGuideView: React.FC<UserGuideViewProps> = ({ onNavigateTab }) =
             </p>
           </div>
 
+          <div className="bg-slate-900/80 border border-amber-500/30 p-3.5 rounded-lg md:col-span-2">
+            <h5 className="font-bold text-amber-400 text-xs mb-1 flex items-center gap-1.5">
+              <span>Q: Setelah mendownload file atau deploy di GitHub, kenapa tampil layar putih dan bagaimana solusinya?</span>
+            </h5>
+            <div className="text-slate-300 leading-relaxed text-[11px] space-y-1.5 mt-1">
+              <p>
+                <strong>Penyebab:</strong> Browser modern memiliki aturan keamanan (CORS) yang melarang modul JavaScript jika file <code className="text-amber-300">index.html</code> dibuka langsung dengan klik ganda dari folder (<code className="text-amber-300">file:///...</code>). Sedangkan di GitHub Pages, path lama mencari aset di root domain.
+              </p>
+              <p><strong>Solusi Praktis:</strong></p>
+              <ul className="list-disc pl-4 space-y-1 text-slate-300">
+                <li><strong>Untuk Windows:</strong> Cukup klik dua kali file <strong><code className="text-emerald-400">start-offline.bat</code></strong> di folder proyek. Server lokal offline akan otomatis aktif dan membuka browser di <code className="text-emerald-400">http://localhost:3000</code>.</li>
+                <li><strong>Untuk Mac / Linux:</strong> Jalankan script terminal <strong><code className="text-emerald-400">./start-offline.sh</code></strong> atau jalankan perintah <code className="text-emerald-400">npm run preview</code>.</li>
+                <li><strong>Untuk GitHub Pages:</strong> Konfigurasi telah diperbarui ke relative base (<code className="text-emerald-400">./</code>) dan file deployment otomatis (<code className="text-emerald-400">.github/workflows/deploy.yml</code>) sudah disertakan. Di GitHub repository Anda, masuk ke <strong>Settings &rarr; Pages &rarr; Source: GitHub Actions</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
           <div className="bg-slate-900/80 border border-slate-800/80 p-3.5 rounded-lg">
             <h5 className="font-bold text-amber-400 text-xs mb-1">
               Q: Bagaimana cara mencetak laporan resmi untuk manajemen tambang?

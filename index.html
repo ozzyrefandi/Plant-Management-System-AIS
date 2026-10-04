@@ -14,16 +14,92 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PlantMS" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="alternate icon" href="./favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      /* Fallback styling before React mounts or if opened via file:// */
+      #pms-fallback-container {
+        min-height: 100vh;
+        background-color: #0b0f17;
+        color: #e2e8f0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+      .pms-box {
+        max-width: 600px;
+        width: 100%;
+        background-color: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      }
+      .pms-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid #1e293b;
+        border-top: 3px solid #facc15;
+        border-radius: 50%;
+        animation: pms-spin 0.8s linear infinite;
+        margin: 0 auto 16px auto;
+      }
+      @keyframes pms-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body style="background-color: #0b0f17; margin: 0;">
+    <div id="root">
+      <div id="pms-fallback-container">
+        <div class="pms-box">
+          <div id="pms-loading-state">
+            <div class="pms-spinner"></div>
+            <div style="text-align: center;">
+              <h2 style="color: #facc15; margin: 0 0 8px 0; font-size: 18px; font-weight: 700;">PLANT MANAGEMENT SYSTEM</h2>
+              <p style="color: #94a3b8; font-size: 14px; margin: 0;">Memuat modul & database lokal pertambangan...</p>
+            </div>
+          </div>
+          <div id="pms-file-protocol-warning" style="display: none; margin-top: 16px; border-top: 1px solid #334155; padding-top: 16px;">
+            <div style="background-color: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+              <h3 style="color: #facc15; margin: 0 0 8px 0; font-size: 16px; font-weight: 700;">⚠️ Terbuka via file:// (Bukan Web Server)</h3>
+              <p style="color: #cbd5e1; font-size: 13px; line-height: 1.6; margin: 0 0 10px 0;">
+                Browser modern memblokir file JavaScript (ES Modules) jika file HTML dibuka langsung lewat klik ganda (protokol <code>file:///</code>) demi alasan keamanan (CORS).
+              </p>
+              <p style="color: #cbd5e1; font-size: 13px; line-height: 1.6; margin: 0;">
+                <strong>Cara Mudah Membuka Offline:</strong>
+              </p>
+              <ol style="color: #94a3b8; font-size: 13px; margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
+                <li>Klik dua kali file <strong><code>start-offline.bat</code></strong> (Windows) atau jalankan <strong><code>./start-offline.sh</code></strong> (Mac/Linux) di folder aplikasi ini.</li>
+                <li>Atau buka Terminal di folder ini dan jalankan: <br/><code style="background:#020617; padding:2px 6px; border-radius:4px; color:#38bdf8;">npm run preview</code> atau <code style="background:#020617; padding:2px 6px; border-radius:4px; color:#38bdf8;">npx serve dist</code></li>
+                <li>Jika menggunakan VSCode, klik kanan <code>index.html</code> &rarr; <em>Open with Live Server</em>.</li>
+              </ol>
+            </div>
+            <div style="font-size: 12px; color: #64748b; text-align: center;">
+              Plant Management System &bull; Mining Fleet Operations
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Detect if user opened the file directly in browser via file:///
+      if (window.location.protocol === 'file:') {
+        var warningEl = document.getElementById('pms-file-protocol-warning');
+        var loadingEl = document.getElementById('pms-loading-state');
+        if (warningEl) warningEl.style.display = 'block';
+        if (loadingEl) loadingEl.style.opacity = '0.5';
+      }
+    </script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
 
